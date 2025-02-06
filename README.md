@@ -1,5 +1,5 @@
-# À propos de Wordpress
- 
+# Partie 1 : À propos de Wordpress
+
 ## Qu'est-ce que Wordpress ?
 
 Wordpress est un **CMS** (Content Managment System), gratuit et libre. Écris en PHP, il donne accès à des bases de données en MySQL et MariaDB.
@@ -23,7 +23,7 @@ En mai 2003, Wordpress v0.7 deviens le successeur officiel de **b2**, et son cr�
 > Il y a différents plans proposés par Wordpress **(tarifs /mois HT)**
 >
 > | Gratuit | Personnel | Premium | Business | Commerce | Entreprise |
->| :-- | :--: | :--: | :--: | :--: | :--: | 
+>| :-- | :--: | :--: | :--: | :--: | :--: |
 >| 0 CHF | 5 CHF | 10 CHF | 30 CHF | 54CHF | à partir de 25000 $ / an |
 >||Faites votre nid sur le Web avec un nom de domaine personnalisé. |Construisez un site Web à votre image à l'aide de puissants outils de conception. |Libérez la puissance de WordPress avec la plateforme d’hébergement géré conçue par les spécialistes de WordPress. |Créez une boutique en ligne puissante avec des extensions premium intégrées. |L’aisance et la flexibilité de WordPress avec une évolutivité, une sécurité et des capacités basées sur les données sans pareilles. |
 >
@@ -48,7 +48,7 @@ En mai 2003, Wordpress v0.7 deviens le successeur officiel de **b2**, et son cr�
 
 
 
-# Installation locale
+# Partie 2 : Installation locale
 ## Processus et étapes d'installation sur Windows
 [cf Hostinger](https://www.youtube.com/watch?v=bBR1sbEe3Vc&ab_channel=L%27Acad%C3%A9mieHostinger)
 
@@ -76,3 +76,182 @@ Et voilà, vous avez installé WordPress en local sur Windows !
 Wordpress a besoin de plusieurs choses pour fonctionner :
 - Microsoft VC++ packages (Si ils sont manquants, vous pouvez les télécharger facilement)
 - D'une plate-forme de développement Web contenant un serveur Apache 2.4, du PHP, une base de données MySQL et/ou MariaDB et PHPMyAdmin. Le logiciel utilisé ici est [WAMP](https://www.wampserver.com/) (utilisable pour windows)
+
+# Partie 3 : Installation distante
+
+[Documentation Ubuntu](https://ubuntu.com/tutorials/install-and-configure-wordpress#1-overview)
+
+## Installation des dépendances
+
+Connectez-vous ä votre machine distante par ssh.
+
+Ensuite, effectuez les commandes suivantes pour installer les dépendances
+
+```shell
+sudo apt update
+```
+
+```shell
+sudo apt install apache2 \
+                 ghostscript \
+                 libapache2-mod-php \
+                 mysql-server \
+                 php \
+                 php-bcmath \
+                 php-curl \
+                 php-imagick \
+                 php-intl \
+                 php-json \
+                 php-mbstring \
+                 php-mysql \
+                 php-xml \
+                 php-zip
+```
+
+## Installation de WordPress
+
+Ici, nous téléchargeons **WordPress** à partir de la dernière release, plutòt que de le télécharger à partir de la commande *apt*
+
+Création d'un dossier pour WordPress
+```shell
+sudo mkdir -p /srv/www
+```
+
+Défini l'utilisateur propriétaire du dossier (l'utilisateur d'apache)
+```shell
+sudo chown www-data: /srv/www
+```
+
+Télécharge la dernière release et le décompresse dans le dossier /srv/www
+```shell
+curl https://wordpress.org/latest.tar.gz | sudo -u www-data tar zx -C /srv/www
+```
+
+## Configuration d'apache pour WordPress
+
+Cröer un fichier **/etc/apache2/sites-available/wordpress.conf**
+```shell
+sudo nano /etc/apache2/sites-available/wordpress.conf
+```
+
+ Écrire le contenu suivant dans le fichier
+ ```shell
+<VirtualHost *:80>
+    DocumentRoot /srv/www/wordpress
+    <Directory /srv/www/wordpress>
+        Options FollowSymLinks
+        AllowOverride Limit Options FileInfo
+        DirectoryIndex index.php
+        Require all granted
+    </Directory>
+    <Directory /srv/www/wordpress/wp-content>
+        Options FollowSymLinks
+        Require all granted
+    </Directory>
+</VirtualHost>
+ ```
+
+Activer le site
+```shell
+sudo a2ensite wordpress
+```
+
+Activer la réécriture d'url
+```shell
+sudo a2enmod rewrite
+```
+
+Désactiver le site par défaut d'apache "It Works"
+```shell
+sudo a2dissite 000-default
+```
+
+Recharger apache pour appliquer les changement effectués
+```shell
+sudo service apache2 reload
+```
+
+
+## Configuration de la base de données
+
+Connexion à MySql
+```shell
+sudo mysql -uroot
+```
+
+Si vous souhaitez ajouter / changer de mot de passe (recommandé)
+```shell
+ALTER USER 'root'@'localhost' IDENTIFIED BY '<password>';
+```
+
+Cröer la base de donnée 'wordpress'
+```shell
+CREATE DATABASE wordpress;
+```
+
+Créer un utilisateur pour faire fonctionner wordpress (remplacer **<password\>** par le mot de passe souhaité)
+```shell
+CREATE USER wordpress@localhost IDENTIFIED BY '<password>';
+```
+
+Affecter les droits à l'utilisateur WordPress
+```shell
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER ON wordpress.* TO wordpress@localhost;
+```
+
+Actualiser les privilèges utilisateurs.
+```shell
+FLUSH PRIVILEGES;
+```
+
+>[!NOTE]
+> Pour quitter MySql, faire la commande **exit**
+
+## Configuration de WordPress pour la connexion à la base de donnée
+
+Copier la sample configuration dans le fichier **wp-config.php**
+```shell
+sudo -u www-data cp /srv/www/wordpress/wp-config-sample.php /srv/www/wordpress/wp-config.php
+```
+
+Remplacer le nom de la base de données par celle créée précédement
+```shell
+sudo -u www-data sed -i 's/database_name_here/wordpress/' /srv/www/wordpress/wp-config.php
+```
+
+Remplacer le nom d'utilisateur par celui créé précédement
+```shell
+sudo -u www-data sed -i 's/username_here/wordpress/' /srv/www/wordpress/wp-config.php
+```
+
+Remplacer le mot de passe par celui créé précédement
+```shell
+sudo -u www-data sed -i 's/password_here/<password>/' /srv/www/wordpress/wp-config.php
+```
+
+Ouvrir le fichier de configuration
+```shell
+sudo -u www-data nano /srv/www/wordpress/wp-config.php
+```
+
+Remplacer ceci
+```
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
+```
+
+par ceux returné par ce lien : https://api.wordpress.org/secret-key/1.1/salt/
+
+## Configuration WordPress
+
+Ouvrir depuis votre machine locale wordpress : http://**<ip de votre machine distance\>**
+
+Döfinissez la langue et les valeurs que vous souhaitez pour votre site
+
+Et voilà, votre site WordPress est prêt.
