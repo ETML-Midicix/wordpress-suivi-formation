@@ -33,7 +33,6 @@ En mai 2003, Wordpress v0.7 deviens le successeur officiel de **b2**, et son cr�
 >
 > #### wordpress.com
 >
-> -
 > - différents plans
 > - optimisation
 > - sécurisation
@@ -74,8 +73,11 @@ Et voilà, vous avez installé WordPress en local sur Windows !
 ## De quoi WordPress a-t-il besoin pour fonctionner ?
 
 Wordpress a besoin de plusieurs choses pour fonctionner :
-- Microsoft VC++ packages (Si ils sont manquants, vous pouvez les télécharger facilement)
-- D'une plate-forme de développement Web contenant un serveur Apache 2.4, du PHP, une base de données MySQL et/ou MariaDB et PHPMyAdmin. Le logiciel utilisé ici est [WAMP](https://www.wampserver.com/) (utilisable pour windows)
+- Un web Serveur (par exemple Apache 2.4)
+- Un language de script (PHP)
+- une base de données (MySQL et/ou MariaDB)
+
+Le logiciel utilisé ici, afin de réunir ces 3 besoins, s'appelle [WAMP](https://www.wampserver.com/) (utilisable pour windows)
 
 # Partie 3 : Installation distante
 
