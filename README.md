@@ -255,3 +255,203 @@ Ouvrir depuis votre machine locale wordpress : http://**<ip de votre machine dis
 Döfinissez la langue et les valeurs que vous souhaitez pour votre site
 
 Et voilà, votre site WordPress est prêt.
+
+# Partie 4 : Installation sur docker
+
+## Qu'est-ce que docker ?
+
+Docker est un outils permettant de lancer et d'empaqueter une applications et leurs dépendances dans des **conteneurs**.
+
+### Différence entre `Conteneurisation`et `Virtualisation` ?
+
+| | Conteneurisation | Virtualisation |
+| :-- | :-- | :-- |
+| **Explication** | Permet d'isoler une application au seins de conteneurs, qui encapsulent l'ensemble des dépendances nécessaires à leur fonctionnement. En tant que développeur, cela permet de travailler sur une application, avec le même environnement | Permet d'émuler un appareil informatique, tels qu'un ordinateur |
+| **Avantages** | Beaucoup plus léger, demandant donc moins de ressources et plus rapide, plus portable car elles encapsulent touts ses dépendances et n'a pas besoin d'hyperviseur pour fonctionner | Environnement complet contenant un système d'exploitations, permettant de simuler un appareil entier, permettant donc également de prendre en compte les erreurs pouvant provenir de l'OS, plus sécurisé car OS indépendant |
+| **Inconvénients** | Chaque conteneurs utilisent le même noyau d'OS, ce qui peut être une faille car si par exemple un conteneur obtiens un virus, les autres peuvent en être affecté  | Environnement demandant beaucoup plus de ressources donc moins performants |
+
+### Dockerfile vs docker compose
+
+> ### Dockerfile
+>
+>Fichier (Dockerfile) de script contenant des commandes, afin de build une image docker (pouvait être utilisé plus tard pour créer une application à conteneur unique)
+
+
+> ### docker compose
+>
+>Fichier (*.yml) permettant de créer une application multi conteneurs, à partir d'images docker en ligne (dockerhub) ou provenant d'un Dockerfile local. Permet de faire communiquer plusieurs conteneurs différents ensemble.
+
+
+
+### Ports, Volumes et Environnements
+
+> ### Ports
+>
+> Permet d'exposer un port à la machine hôte, par un port aléatoire ou donné en paramètre
+
+> ### Volumes
+>
+>Permet de lier des dossiers locaux avec des dossiers dans le conteneur
+
+> ### Environnements
+>
+>Permet de définir les variables d'environnements du conteneur, qui seront utilisés afin de définir des valeurs tels que des identifiants
+
+
+
+
+## Installation
+
+### Installer docker
+
+Installer docker et ces plugins
+```shell
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+Pour tester si l'installation a fonctionnée
+
+```shell
+sudo docker run hello-world
+```
+
+> [!NOTE]
+> Explication des différents packages installé
+>
+> | docker-ce | docker-ce-cli | containerd.io | docker-buildx-plugin | docker-compose-plugin |
+>| :--: | :--: | :--: | :--: | :--: |
+>| Version de docker qui supporte l'édition communautaire, d'où son nom (ce => Community Edition), *à besoin de **docker-ce-cli** | **docker-ce** version console | Contrôle tout ce que le conteneur pourrait faire, des transferts d'images et de stockage à l'exécution et la supervision du traffic réseau | Permet d'étendre les possibilité de build d'images, en utilisant le builder `BuildKit` | Permet d'effectuer des `docker compose`|
+
+### Installer Wordpress
+
+[source](https://medium.com/@richardevcom/wordpress-development-environment-with-docker-ba52427bdd65)
+
+Reproduisez l'arborescence ci-dessous
+
+```
+wp-dev/
+├─ wp-content/
+├─ compose.yml
+├─ .env
+```
+
+Vous pouvez créer les dossiers avec cette commande la faire avec cette commande
+
+```shell
+sudo mkdir wp-dev wp-dev/wp-content
+```
+
+Pour créer le ficher `.env`, faites les commandes ci-dessous
+
+Se déplacer dans le dossier wp-dev
+```shell
+cd wp-dev
+```
+
+Créer et ouvrir le fichier `.env` en mode édition
+```shell
+sudo nano .env
+```
+
+Coller le contenu ci-dessous
+
+.env
+```shell
+ROOT_PASSWORD=""
+WORDPRESS_USERNAME=""
+WORDPRESS_PASSWORD=""
+```
+
+>[!NOTE]
+> Remplacer les champs de caractères vides par les données corespondantes à celles que vous souhaités
+
+
+Créer et ouvrir le fichier `docker-compose.yml` en mode édition
+```shell
+sudo nano docker-compose.yml
+```
+
+Coller le contenu ci-dessous
+```yml
+#docker-compose.yml
+version: "3.6"
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=$WORDPRESS_USERNAME
+      - WORDPRESS_DB_PASSWORD=$WORDPRESS_PASSWORD
+    depends_on:
+      - db
+      - phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+
+  db:
+    image: mariadb:latest
+    container_name: db
+    volumes:
+      - db_data:/var/lib/mysql
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD
+      - MYSQL_USER=$WORDPRESS_USERNAME
+      - MYSQL_PASSWORD=$WORDPRESS_PASSWORD
+      - MYSQL_DATABASE=wordpress
+    restart: always
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8180:80
+    env_file: .env
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: $ROOT_PASSWORD
+
+volumes:
+  db_data:
+
+```
+
+effectuez la commande pour créer l'application muti conteneur
+```shell
+docker compose up -d
+```
+
+Lancer http://localhost:8080
+
+Configuré le site WordPress
+
+Et voilà
+
+
+### Commandes utiles à connaître
+
+```shell
+docker compuse up -d
+```
+
+```shell
+docker ps -a
+```
+
+```shell
+docker compose start wordpress
+```
+
+```shell
+docker exec -it db sh
+```
