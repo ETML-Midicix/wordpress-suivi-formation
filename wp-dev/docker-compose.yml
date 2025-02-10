@@ -51,7 +51,7 @@ services:
   adminer:
     depends_on:
       - db
-    image: adminer/adminer:latest
+    image: adminer:latest
     container_name: adminer
     restart: always
     ports:
