@@ -439,6 +439,10 @@ Configuré le site WordPress
 
 Et voilà
 
+`Schéma ERD (entity-relationship diagram) de la base de données WordPress`
+![Screenshot from 2025-02-10 11-35-29](https://github.com/user-attachments/assets/bbc02a6a-af92-4174-b734-ab5b38b75a60)
+
+
 
 ### Commandes utiles à connaître
 
