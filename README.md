@@ -261,6 +261,7 @@ Et voilà, votre site WordPress est prêt.
 ## Que manque-t-il pour que mon site soit opérationnel ?
 
 Cela dépend de l'utilisations, mais plusieurs idées peuvent être envisagées :
+- HTTPS
 - Plugins
 - Thèmes
 - Pages
@@ -530,5 +531,3 @@ J'ai fais
 ```shell
 sudo apt install docker.io docker-compose
 ```
-
-## Que manque-t-il pour que mon site soit opérationnel ?
