@@ -85,7 +85,7 @@ Le logiciel utilisé ici, afin de réunir ces 3 besoins, s'appelle [WAMP](https:
 
 ## Installation des dépendances
 
-Connectez-vous ä votre machine distante par ssh.
+Connectez-vous à votre machine distante par ssh.
 
 Ensuite, effectuez les commandes suivantes pour installer les dépendances
 
@@ -131,7 +131,7 @@ curl https://wordpress.org/latest.tar.gz | sudo -u www-data tar zx -C /srv/www
 
 ## Configuration d'apache pour WordPress
 
-Cröer un fichier **/etc/apache2/sites-available/wordpress.conf**
+Créer un fichier **/etc/apache2/sites-available/wordpress.conf**
 ```shell
 sudo nano /etc/apache2/sites-available/wordpress.conf
 ```
@@ -254,9 +254,16 @@ par ceux returné par ce lien : https://api.wordpress.org/secret-key/1.1/salt/
 
 Ouvrir depuis votre machine locale wordpress : http://**<ip de votre machine distance\>**
 
-Döfinissez la langue et les valeurs que vous souhaitez pour votre site
+Définissez la langue et les valeurs que vous souhaitez pour votre site
 
 Et voilà, votre site WordPress est prêt.
+
+## Que manque-t-il pour que mon site soit opérationnel ?
+
+Cela dépend de l'utilisations, mais plusieurs idées peuvent être envisagées :
+- Plugins
+- Thèmes
+- Pages
 
 # Partie 4 : Installation sur docker
 
@@ -465,3 +472,63 @@ Obtenir les processus en cours à l'intérieur d'un conteneur (après la command
 ```shell
 ps -aux
 ```
+
+
+# Partie 5 : Déploiement avec Docker (Ops)
+
+## Installation
+
+Se connecter en ssh à la machine distante
+
+>[!NOTE]
+> Si vos processus de la **Partie 3** sont toujours actif, il faudrait les désactiver ou changer les ports utilisés, comme ici par exemple en désactivant apache2
+
+Désactiver apache2
+```shell
+sudo service apache2 stop
+```
+
+Télécharger docker
+
+```shell
+sudo apt install docker.io docker-compose
+```
+
+clone le fichier .yml
+```shell
+git clone https://github.com/ETML-Midicix/wordpress-suivi-formation.git
+```
+
+Déplacer dans le dossier contenant le `docker-compose.yml`
+```shell
+cd wordpress-suivi-formation/wp-dev/
+```
+
+Créer le multi-conteneur
+```shell
+docker-compose up -d
+```
+
+## Configuration WordPress
+
+Si vous n'avez pas changé de port, votre processus devrait être actif à l'adresse IP de votre machine distante suivi du port utilisé par wordpress.
+
+Ouvrir depuis votre machine locale wordpress : http://**<ip de votre machine distance:8080\>**
+
+Définissez la langue et les valeurs que vous souhaitez pour votre site
+
+Et voilà, votre site WordPress est prêt.
+
+## Mon déploiement en production est-il en tout point similaire à celui sur mon ordinateur ?
+
+Quasiment tout est à l'identique, aucune modification n'est nécessaire.
+Sauf exceptionnellement quelques erreurs avec l'installation des packages utilisés lors de la **partie 4** qui refusait de s'installer, et au lieu de faire
+```shell
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+J'ai fais
+```shell
+sudo apt install docker.io docker-compose
+```
+
+## Que manque-t-il pour que mon site soit opérationnel ?
