@@ -461,3 +461,7 @@ docker compose start wordpress
 ```shell
 docker exec -it db sh
 ```
+Obtenir les processus en cours à l'intérieur d'un conteneur (après la commande précédente)
+```shell
+ps -aux
+```
