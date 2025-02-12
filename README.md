@@ -1,3 +1,13 @@
+<h1 align="center">Table des Matières</h1>
+
+[[TOC]]
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 # Partie 1 : À propos de Wordpress
 
 ## Qu'est-ce que Wordpress ?
@@ -561,3 +571,79 @@ Une grande partie des éléments du site de l'EPFL sont open sources, tels que :
 - Le code Ansible pour le déploiement et le maintien de la plateforme : https://github.com/epfl-si/wp-ops
 - Le thème du site WordPress de l'EPFL : https://github.com/epfl-si/wp-theme-2018
 - Les différents plugins : https://github.com/epfl-si?q=wp
+
+
+# Partie Wrap Up
+
+## Alternative à WordPress
+
+- [Joomla](https://www.joomla.fr/)
+- [Grav](https://getgrav.org/)
+- [Drupal](https://new.drupal.org/)
+
+### Sources
+
+[Alternativeto](https://alternativeto.net/software/wordpress/?license=opensource)
+
+## Licence et modèle commercial
+
+### Licence
+La licence utilisé par WordPress est la licence publique GNU ([GPLv2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) ou +)
+
+### Modèle commercial
+Plusieurs solutions permettent à [Automattic](https://automattic.com/) (les propriétaires de [WordPress.com](https://wordpress.com/)) de faire des revenus :
+- [Hébergement](https://wordpress.com/fr/hebergement/)
+- [Thèmes](https://wordpress.com/fr/themes) (dont certains nécessitent une mise à niveau de votre compte)
+- [Plugins](https://wordpress.com/fr/plugins) (certains sont fais par eux comme on peut voir [ici](https://wordpress.com/fr/plugins?s=developer%3A%22Automattic%22))
+
+## Sites connu utilisant WordPress
+
+- [EPFL](https://epfl.ch/)
+- [Jquery](https://jquery.com/)
+- [Le site de la Maison Blanche](https://www.whitehouse.gov/)
+- [Nasa](https://www.nasa.gov/)
+- [Microsoft New](https://news.microsoft.com/source/)
+- [Cpanel](https://cpanel.net/)
+- [Css tricks](https://css-tricks.com/)
+
+### Sources
+Wappalizer (addons + [website](https://www.wappalyzer.com/technologies/cms/wordpress/?utm_source=popup&utm_medium=extension&utm_campaign=wappalyzer)), [wpbeginner](https://www.wpbeginner.com/showcase/40-most-notable-big-name-brands-that-are-using-wordpress/)
+
+
+# Conclusion
+
+## Avantages de WordPress
+
+- Facile à utiliser
+- WordPress.org qui permet d'avoir le CMS en local (code open source)
+- Utilisation des plugins et thèmes personnalisés et gratuit grâces à wordpress.org
+
+## Inconvénients de WordPress
+
+- Sécurité
+- Gestion des droits sur les pages
+
+## WordPress est-il un bon choix pour l’EPFL
+
+WordPress a ses avantages ainsi que ses inconvénients, tels que le code open source ou bien la gestion des droits pour chaque pages.
+
+Cependant, selon moi, WordPress reste tout de même un bon choix pour l'EPFL.
+
+## Bilan de stage
+
+### Ce que j'ai appris
+
+Nouveaux outils et commandes :
+
+- [docker](https://www.docker.com/) (outil de conteneurisation)
+- [tmux](https://doc.ubuntu-fr.org/tmux) (permet d'émuler plusieurs terminal avec la possibilités de les afficher en écran scindé)
+- [vim](https://doc.ubuntu-fr.org/vim) (permet d'éditer un fichier, remplace nano)
+
+### Ce que j'ai aimé
+
+- La facilité de la portabilité des conteneurs avec docker
+- tmux
+
+### Ce que j'ai moins aimé
+
+- Installer WordPress en local sur Windows

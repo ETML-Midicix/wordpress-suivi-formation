@@ -24,9 +24,6 @@ services:
     container_name: db
     volumes:
       - db_data:/var/lib/mysql
-      # This is optional!!!
-      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
-      # # #
     env_file: .env
     environment:
       - MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD
