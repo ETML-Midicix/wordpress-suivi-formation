@@ -1,12 +1,64 @@
 <h1 align="center">Table des Matières</h1>
 
-[[TOC]]
+
+- [Partie 1 : À propos de Wordpress](#partie-1--à-propos-de-wordpress)
+  - [Qu'est-ce que Wordpress ?](#quest-ce-que-wordpress-)
+  - [Questions](#questions)
+- [Partie 2 : Installation locale](#partie-2--installation-locale)
+  - [Processus et étapes d'installation sur Windows](#processus-et-étapes-dinstallation-sur-windows)
+  - [De quoi WordPress a-t-il besoin pour fonctionner ?](#de-quoi-wordpress-a-t-il-besoin-pour-fonctionner-)
+- [Partie 3 : Installation distante](#partie-3--installation-distante)
+  - [Installation des dépendances](#installation-des-dépendances)
+  - [Installation de WordPress](#installation-de-wordpress)
+  - [Configuration d'apache pour WordPress](#configuration-dapache-pour-wordpress)
+  - [Configuration de la base de données](#configuration-de-la-base-de-données)
+  - [Configuration de WordPress pour la connexion à la base de donnée](#configuration-de-wordpress-pour-la-connexion-à-la-base-de-donnée)
+  - [Configuration WordPress](#configuration-wordpress)
+  - [Que manque-t-il pour que mon site soit opérationnel ?](#que-manque-t-il-pour-que-mon-site-soit-opérationnel-)
+- [Partie 4 : Installation sur docker](#partie-4--installation-sur-docker)
+  - [Qu'est-ce que docker ?](#quest-ce-que-docker-)
+    - [Différence entre `Conteneurisation`et `Virtualisation` ?](#différence-entre-conteneurisationet-virtualisation-)
+    - [Dockerfile vs docker compose](#dockerfile-vs-docker-compose)
+    - [Ports, Volumes et Environnements](#ports-volumes-et-environnements)
+  - [Installation](#installation)
+    - [Installer docker](#installer-docker)
+    - [Installer Wordpress](#installer-wordpress)
+    - [Commandes utiles à connaître](#commandes-utiles-à-connaître)
+- [Partie 5 : Déploiement avec Docker (Ops)](#partie-5--déploiement-avec-docker-ops)
+  - [Installation](#installation-1)
+  - [Configuration WordPress](#configuration-wordpress-1)
+  - [Mon déploiement en production est-il en tout point similaire à celui sur mon ordinateur ?](#mon-déploiement-en-production-est-il-en-tout-point-similaire-à-celui-sur-mon-ordinateur-)
+- [Partie 6 : WordPress@EPFL](#partie-6--wordpressepfl)
+  - [Combien de sites sont agrégés (assemblé / fusionné) ensemble pour donner le site de l'EPFL ?](#combien-de-sites-sont-agrégés-assemblé--fusionné-ensemble-pour-donner-le-site-de-lepfl-)
+    - [Selon moi](#selon-moi)
+    - [Réellement](#réellement)
+  - [Pourquoi pensez-vous que cette façon de faire a été choisi ?](#pourquoi-pensez-vous-que-cette-façon-de-faire-a-été-choisi-)
+    - [Selon moi](#selon-moi-1)
+    - [Réellement](#réellement-1)
+  - [Code Source](#code-source)
+- [Partie Wrap Up](#partie-wrap-up)
+  - [Alternative à WordPress](#alternative-à-wordpress)
+    - [Sources](#sources)
+  - [Licence et modèle commercial](#licence-et-modèle-commercial)
+    - [Licence](#licence)
+    - [Modèle commercial](#modèle-commercial)
+  - [Sites connu utilisant WordPress](#sites-connu-utilisant-wordpress)
+    - [Sources](#sources-1)
+- [Conclusion](#conclusion)
+  - [Avantages de WordPress](#avantages-de-wordpress)
+  - [Inconvénients de WordPress](#inconvénients-de-wordpress)
+  - [WordPress est-il un bon choix pour l’EPFL](#wordpress-est-il-un-bon-choix-pour-lepfl)
+  - [Bilan de stage](#bilan-de-stage)
+    - [Ce que j'ai appris](#ce-que-jai-appris)
+    - [Ce que j'ai aimé](#ce-que-jai-aimé)
+    - [Ce que j'ai moins aimé](#ce-que-jai-moins-aimé)
 
 <br/>
 <br/>
 <br/>
 <br/>
 <br/>
+
 
 # Partie 1 : À propos de Wordpress
 
