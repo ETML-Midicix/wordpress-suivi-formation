@@ -482,7 +482,7 @@ ps -aux
 Se connecter en ssh à la machine distante
 
 >[!NOTE]
-> Si vos processus de la **Partie 3** sont toujours actif, il faudrait les désactiver ou changer les ports utilisés, comme ici par exemple en désactivant apache2
+> Si vos processus de la **Partie 3** sont toujours actif, il faudra les désactiver ou changer les ports utilisés, comme ici par exemple en désactivant apache2
 
 Désactiver apache2
 ```shell
@@ -531,3 +531,33 @@ J'ai fais
 ```shell
 sudo apt install docker.io docker-compose
 ```
+
+# Partie 6 : WordPress@EPFL
+
+## Combien de sites sont agrégés (assemblé / fusionné) ensemble pour donner le site de l'EPFL ?
+
+### Selon moi
+
+De mémoire, d'après des informations que j'avais eu, il y a environ 1000 sites agrégés ensemble.
+
+### Réellement
+
++-890
+
+## Pourquoi pensez-vous que cette façon de faire a été choisi ?
+
+### Selon moi
+
+De mémoire, d'après des informations que j'avais eu, cette façon de faire a été adopté, afin de pouvoir modifier et gérer plus facilement une page web ainsi que ces droits selon les rôles utilisateurs.
+
+### Réellement
+
+Idem
+
+## Code Source
+
+Une grande partie des éléments du site de l'EPFL sont open sources, tels que :
+- Le kit de développement : https://github.com/epfl-si/wp-dev
+- Le code Ansible pour le déploiement et le maintien de la plateforme : https://github.com/epfl-si/wp-ops
+- Le thème du site WordPress de l'EPFL : https://github.com/epfl-si/wp-theme-2018
+- Les différents plugins : https://github.com/epfl-si?q=wp
