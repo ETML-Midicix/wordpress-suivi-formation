@@ -1,6 +1,7 @@
-<h1 align="center">Table des Matières</h1>
+# Table des Matières
 
 
+- [Table des Matières](#table-des-matières)
 - [Partie 1 : À propos de Wordpress](#partie-1--à-propos-de-wordpress)
   - [Qu'est-ce que Wordpress ?](#quest-ce-que-wordpress-)
   - [Questions](#questions)
@@ -53,11 +54,6 @@
     - [Ce que j'ai aimé](#ce-que-jai-aimé)
     - [Ce que j'ai moins aimé](#ce-que-jai-moins-aimé)
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 
 
 # Partie 1 : À propos de Wordpress
@@ -77,10 +73,10 @@ En mai 2003, Wordpress v0.7 deviens le successeur officiel de **b2**, et son cr�
 
 ## Questions
 
-> ### 1) WordPress est-il beaucoup utilisé ?
+> ### 1. WordPress est-il beaucoup utilisé ?
 > D'après wikipedia "À la date du 19 janvier 2025, WordPress était utilisé par 43,5 % des sites web dans le monde", ce qui reviens à un taux se rapprochant de la moitié du marché. Les autres sites sont autour de ces chiffres là, environ 43,6%.
 
-> ### 2) Combien coûte WordPress ?
+> ### 2. Combien coûte WordPress ?
 >
 > Il y a différents plans proposés par Wordpress **(tarifs /mois HT)**
 >
@@ -91,7 +87,7 @@ En mai 2003, Wordpress v0.7 deviens le successeur officiel de **b2**, et son cr�
 >
 >Se référer au lien [ci-contre](https://wordpress.com/fr/pricing/)
 
-> ### 3) Quelle est la différence entre wordpress.com et wordpress.org
+> ### 3. Quelle est la différence entre wordpress.com et wordpress.org
 >
 > #### wordpress.com
 >
@@ -363,11 +359,11 @@ Docker est un outils permettant de lancer et d'empaqueter une applications et le
 
 > ### Volumes
 >
->Permet de lier des dossiers locaux avec des dossiers dans le conteneur
+> Permet de lier des dossiers locaux avec des dossiers dans le conteneur
 
 > ### Environnements
 >
->Permet de définir les variables d'environnements du conteneur, qui seront utilisés afin de définir des valeurs tels que des identifiants
+> Permet de définir les variables d'environnements du conteneur, qui seront utilisés afin de définir des valeurs tels que des identifiants
 
 
 
@@ -427,7 +423,7 @@ sudo nano .env
 
 Coller le contenu ci-dessous
 
-.env
+Fichier .env
 ```shell
 ROOT_PASSWORD=""
 WORDPRESS_USERNAME=""
@@ -531,6 +527,7 @@ docker compose start wordpress
 ```shell
 docker exec -it db sh
 ```
+
 Obtenir les processus en cours à l'intérieur d'un conteneur (après la commande précédente)
 ```shell
 ps -aux

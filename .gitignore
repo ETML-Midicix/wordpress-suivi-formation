@@ -1,3 +1,4 @@
 /wp-dev/dump.sql
 /wp-dev/wp-content/*
 .env
+*.pdf
